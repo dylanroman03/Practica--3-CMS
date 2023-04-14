@@ -124,11 +124,64 @@ void getWebSites()
   }
 }
 
+
+void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos)
+{
+
+
+  for(int k = 0; k < CanidadElementos; k++){
+
+        std::cout << Elementos[k]<< std::endl;
+
+  }
+
+  cout << endl;
+
+    
+
+}
+
+
+void getImagenes()
+{
+
+  int CantImagenes = datos.getCantImagenesMenu();
+
+  for(int i = 0; i < CantImagenes; i++)
+  {
+
+    char *Imagen = datos.getImagenesMenu(i);
+    int Imagen_Len = strlen(Imagen);
+    char *Imagen_Copia = new char[Imagen_Len + 1];
+    strcpy(Imagen_Copia, Imagen);
+
+    char *Elemento;
+    char *Elementos[6];
+    int j = 0;
+    Elemento = strtok(Imagen_Copia, "#");
+
+    while (Elemento != NULL)
+    {
+      Elementos[j] = new char[strlen(Elemento) + 1];
+      strcpy(Elementos[j], Elemento);
+      Elemento = strtok(NULL, "#");
+      j++;
+    }
+
+    
+    mostrarInformacionImagenes(Elementos, j);
+  }
+
+}
+
+
+
 int main(int argc, char const *argv[])
 {
   // printf("Hello World!");
 
-  getPlantillas();
-  // getWebSites();
+  //getPlantillas();
+  //getWebSites();
+  getImagenes();
   return 0;
 }
