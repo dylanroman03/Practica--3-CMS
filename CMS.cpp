@@ -11,6 +11,46 @@ CMS::CMS()
   getPlantillas();
 }
 
+void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos)
+{
+
+  for (int k = 0; k < CanidadElementos; k++)
+  {
+    std::cout << Elementos[k] << std::endl;
+  }
+
+  cout << endl;
+}
+
+void CMS::getImages()
+{
+  int CantImagenes = datos.getCantImagenesMenu();
+
+  for (int i = 0; i < CantImagenes; i++)
+  {
+
+    char *Imagen = datos.getImagenesMenu(i);
+    int Imagen_Len = strlen(Imagen);
+    char *Imagen_Copia = new char[Imagen_Len + 1];
+    strcpy(Imagen_Copia, Imagen);
+
+    char *Elemento;
+    char *Elementos[6];
+    int j = 0;
+    Elemento = strtok(Imagen_Copia, "#");
+
+    while (Elemento != NULL)
+    {
+      Elementos[j] = new char[strlen(Elemento) + 1];
+      strcpy(Elementos[j], Elemento);
+      Elemento = strtok(NULL, "#");
+      j++;
+    }
+
+    mostrarInformacionImagenes(Elementos, j);
+  }
+}
+
 void CMS::getPlantillas()
 {
   int cantPlantillas = datos.getCantPlantillas();
@@ -146,7 +186,6 @@ void CMS::createWebsite(char *elementos[], int cantElementos)
       plantilla = *p;
     }
   }
-
 
   cout << "Name: " << plantilla.getNombre() << "id: " << plantilla.getId() << endl;
   if (cantElementos == 5)
