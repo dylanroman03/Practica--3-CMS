@@ -7,26 +7,19 @@
 #include "Imagen.h"
 #include "Item.h"
 
-enum class TipoSitioWeb
-{
-  COMERCIAL,
-  PATROCINADO
-};
-
 class SitioWeb
 {
 protected:
-  std::string nombre;
+  char* nombre;
   Plantilla plantilla;
   int cantImagenes;
   std::vector<Imagen> imagenes;
   int cantItems;
   std::vector<Item> items;
-  TipoSitioWeb tipo;
 
 public:
-  SitioWeb(std::string nombre, Plantilla plantilla, int cantImagenes, std::vector<Imagen> imagenes,
-           int cantItems, std::vector<Item> items, TipoSitioWeb tipo);
+  SitioWeb(char* nombre, Plantilla plantilla, int cantImagenes, std::vector<Imagen> imagenes,
+           int cantItems, std::vector<Item> items);
   virtual void pintar() = 0;
 };
 

@@ -17,13 +17,14 @@ enum class PosicionMenu
 class Plantilla
 {
   int id;
-  string nombre;
+  char* nombre;
   PosicionMenu posicion_menu;
   float precio;
 
 public:
-  Plantilla(int id, string nombre, PosicionMenu posicion_menu, float precio)
+  Plantilla(int id, char* nombre, PosicionMenu posicion_menu, float precio)
       : id(id), nombre(nombre), posicion_menu(posicion_menu), precio(precio) {}
+  Plantilla() {}
 
   int getId() const { return id; }
   string getNombre() const { return nombre; }
