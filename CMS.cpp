@@ -11,12 +11,43 @@ CMS::CMS()
   getPlantillas();
 }
 
-void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos)
+void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos, int ControlItemsImagenes)
 {
+
+
 
   for (int k = 0; k < CanidadElementos; k++)
   {
-    std::cout << Elementos[k] << std::endl;
+    if(ControlItemsImagenes== 1){
+
+      if(k == 0){
+
+        std::cout << "ITEM" << std::endl;
+
+
+      }
+
+      std::cout << Elementos[k] << std::endl;
+
+    }
+
+  }
+  cout << endl;
+
+  
+  for (int k = 0; k < CanidadElementos; k++)
+  {
+    if(ControlItemsImagenes == 0){
+      if(k == 0){
+        
+        std::cout << "imagen" << std::endl;
+
+
+      }
+      std::cout << Elementos[k] << std::endl;
+
+    }
+
   }
 
   cout << endl;
@@ -25,7 +56,8 @@ void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos)
 void CMS::getImages()
 {
   int CantImagenes = datos.getCantImagenesMenu();
-
+  int iteradorDeItems = 0;
+  int item = 0;
   for (int i = 0; i < CantImagenes; i++)
   {
 
@@ -36,8 +68,20 @@ void CMS::getImages()
 
     char *Elemento;
     char *Elementos[6];
+
+
     int j = 0;
     Elemento = strtok(Imagen_Copia, "#");
+
+    if(Imagen_Len < 20){
+
+      item = 1;
+
+    }else{
+
+      item = 0;    
+      
+    }
 
     while (Elemento != NULL)
     {
@@ -47,7 +91,7 @@ void CMS::getImages()
       j++;
     }
 
-    mostrarInformacionImagenes(Elementos, j);
+    mostrarInformacionImagenes(Elementos, j, item);
   }
 }
 
