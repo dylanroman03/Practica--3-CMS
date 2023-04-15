@@ -129,7 +129,7 @@ void CMS::decoderData(char *elementos[], int cantElementos)
   int num = atoi(elementos[1]);
 
   // Precio del bit 11 al bit 31 (21 bits)
-  int precio = (num >> 10) & 0xFFFFF;
+  int precio = (num >> 11) & 0xFFFFF;
 
   // Id de la plantilla del bit 6 al bit 10 (5 bits)
   int id = (num >> 6) & 0x1F;
