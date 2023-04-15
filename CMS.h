@@ -27,6 +27,7 @@ public:
   void printCommersial();
   void bestPlantilla();
   void pintarWebsites();
+  void memoryImages();
 
   // Método para obtener la cantidad de sitios web
   int getQtyWebSites() const;

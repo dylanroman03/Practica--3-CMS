@@ -161,7 +161,6 @@ void CMS::decoderData(char *elementos[], int cantElementos)
     std::cout << "Valor inválido";
   }
 
-
   Plantilla *plantilla = new Plantilla(id, name, posicionMenu, precio);
   plantillas.push_back(plantilla);
 }
@@ -266,6 +265,31 @@ void CMS::printCommersial()
 
   std::cout << "---------------------\t-------" << std::endl;
   std::cout << "Total\t\t\t$" << precioTotal << std::endl;
+}
+
+void CMS::memoryImages()
+{
+  std::cout << "Listado de sitios web con la cantidad de bytes necesaria para almacenar las imágenes que contienen " << std::endl;
+  std::cout
+      << "Nombre del sitio web\tCantidad (bytes)" << std::endl;
+  std::cout << "---------------------\t-------" << std::endl;
+
+
+  int total = 0;
+  for (const auto &sitioWeb : webSites)
+  {
+    int tamaño = 0;
+    std::vector<Imagen> images = sitioWeb->getImagenes();
+    for (const auto &image : images)
+    {
+      tamaño += image.getTamano();
+    }
+    cout << sitioWeb->getNombre() << "\t\t\t" << tamaño << endl;
+    total += tamaño;
+  }
+
+  cout << "\t\t Total: " << total << endl;
+  cout << "---------------------\t-------" << endl;
 }
 
 void CMS::bestPlantilla()
