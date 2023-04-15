@@ -2,6 +2,7 @@
 #include "Datos.h"
 #include "Comercial.h"
 #include "Patrocinado.h"
+#include "Item.h"
 #include <string.h>
 
 // Constructor por defecto
@@ -11,44 +12,56 @@ CMS::CMS()
   getPlantillas();
 }
 
-void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos, int ControlItemsImagenes)
+void CMS::mostrarInformacionImagenes(char *Elementos[], int CanidadElementos, int ControlItemsImagenes)
 {
 
+  // for (int k = 0; k < CanidadElementos; k++)
+  // {
+  //   if (ControlItemsImagenes == 1)
+  //   {
 
+  //     if (k == 0)
+  //     {
 
-  for (int k = 0; k < CanidadElementos; k++)
+  //       std::cout << "ITEM" << Elementos[1] << std::endl;
+  //     }
+
+  //     std::cout << Elementos[k] << std::endl;
+  //   }
+  // }
+
+  if (ControlItemsImagenes == 1)
   {
-    if(ControlItemsImagenes== 1){
-
-      if(k == 0){
-
-        std::cout << "ITEM" << std::endl;
-
-
-      }
-
-      std::cout << Elementos[k] << std::endl;
-
-    }
-
+    int horientacion = CanidadElementos > 2 ? atoi(Elementos[2]) : 0;
+    Item *item = new Item(atoi(Elementos[0]), Elementos[1], horientacion);
+    itemsArray.push_back(item);
   }
+  else
+  {
+    int id = atoi(Elementos[0]);
+    char* ruta = Elementos[1];
+    int size = atoi(Elementos[2]);
+    char* name = Elementos[3];
+    int column = atoi(Elementos[4]);
+    int row = atoi(Elementos[5]);
+    Imagen *imagen = new Imagen(id, ruta, size, name, column, row);
+    imagenes.push_back(imagen);
+  }
+
   cout << endl;
 
-  
-  for (int k = 0; k < CanidadElementos; k++)
-  {
-    if(ControlItemsImagenes == 0){
-      if(k == 0){
-        
-        std::cout << "imagen" << std::endl;
+  // for (int k = 0; k < CanidadElementos; k++)
+  // {
+  //   if (ControlItemsImagenes == 0)
+  //   {
+  //     if (k == 0)
+  //     {
 
-
-      }
-      std::cout << Elementos[k] << std::endl;
-
-    }
-
-  }
+  //       std::cout << "imagen" << std::endl;
+  //     }
+  //     std::cout << Elementos[k] << std::endl;
+  //   }
+  // }
 
   cout << endl;
 }
@@ -69,18 +82,18 @@ void CMS::getImages()
     char *Elemento;
     char *Elementos[6];
 
-
     int j = 0;
     Elemento = strtok(Imagen_Copia, "#");
 
-    if(Imagen_Len < 20){
+    if (Imagen_Len < 20)
+    {
 
       item = 1;
+    }
+    else
+    {
 
-    }else{
-
-      item = 0;    
-      
+      item = 0;
     }
 
     while (Elemento != NULL)
@@ -92,6 +105,19 @@ void CMS::getImages()
     }
 
     mostrarInformacionImagenes(Elementos, j, item);
+  }
+
+  /// recorremos los items
+  for (auto item : itemsArray)
+  {
+    cout << item->getId() << item->getNombre() << item->getLocalizacion() << endl;
+  }
+
+  for (auto imagen : imagenes)
+  {
+    // cout << imagen->getId() << imagen->getNombreArchivo() << imagen->getRuta() << endl;
+    /// Imprimimos la ruta
+    cout << imagen->getRuta() << endl;
   }
 }
 

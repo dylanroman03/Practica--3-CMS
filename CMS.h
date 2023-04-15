@@ -21,6 +21,7 @@ public:
   void getItems();
   void decoderData(char *elementos[], int cantElementos);
   void createWebsite(char *elementos[], int cantElementos);
+  void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos, int ControlItemsImagenes);
 
   // Método para obtener la cantidad de sitios web
   int getQtyWebSites() const;
@@ -32,7 +33,7 @@ private:
   std::vector<SitioWeb *> webSites;
   std::vector<Plantilla *> plantillas;
   std::vector<Imagen *> imagenes;
-  std::vector<Item *> items;
+  std::vector<Item *> itemsArray;
   Datos datos;
 };
 
