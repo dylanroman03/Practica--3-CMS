@@ -10,8 +10,8 @@ Datos datos;
 
 int main(int argc, char const *argv[])
 {
-  CMS cms;
   cout << "Bienvenido al CMS, Cargando Data..." << endl;
+  CMS cms;
   cms.addAllWebsites();
 
   // cms.printCommersial();
