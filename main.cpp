@@ -12,5 +12,7 @@ int main(int argc, char const *argv[])
 {
   CMS cms;
   cms.addAllWebsites();
+  cms.printCommersial();
+  cms.bestPlantilla();
   return 0;
 }

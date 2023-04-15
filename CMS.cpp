@@ -191,18 +191,10 @@ void CMS::addAllWebsites()
       j++;
     }
 
-    cout << elementos[0] << " " << elementos[1] << endl;
-
     // Llamar a la función que crea el sitio web pasandole los elementos
     createWebsite(elementos, j, imgPosition, itemPosition);
     imgPosition += atoi(elementos[2]);
     itemPosition += atoi(elementos[3]);
-  }
-
-  // Imprimir los webSites
-  for (auto ws : webSites)
-  {
-    ws->pintar();
   }
 }
 
@@ -248,6 +240,61 @@ void CMS::createWebsite(char *elementos[], int cantElementos, int imgPosition, i
   {
     Patrocinado *patrocinado = new Patrocinado(name, plantilla, cantImagenes, imagenesWS, cantItemsMenu, itemsWS, elementos[5]);
     webSites.push_back(patrocinado);
+  }
+}
+
+void CMS::printCommersial()
+{
+  double precioTotal = 0.0;
+  std::cout << "Listado de sitios web comerciales" << std::endl;
+  std::cout << "Nombre del sitio web\tPrecio" << std::endl;
+  std::cout << "---------------------\t-------" << std::endl;
+
+  for (const auto &sitioWeb : webSites)
+  {
+    if (dynamic_cast<Comercial *>(sitioWeb))
+    {
+      Comercial *sitioWebComercial = dynamic_cast<Comercial *>(sitioWeb);
+      std::cout << sitioWebComercial->getNombre() << "\t\t$" << sitioWebComercial->getPrecio() << std::endl;
+      precioTotal += sitioWebComercial->getPrecio();
+    }
+  }
+
+  std::cout << "---------------------\t-------" << std::endl;
+  std::cout << "Total\t\t\t$" << precioTotal << std::endl;
+}
+
+void CMS::bestPlantilla()
+{
+  int idPlantilla = 0;
+  int cantSitios = 0;
+
+  for (const auto &plantilla : plantillas)
+  {
+    int cantSitiosPlantilla = 0;
+    for (const auto &sitioWeb : webSites)
+    {
+      if (plantilla->getId() == sitioWeb->getPlantilla().getId())
+      {
+        cantSitiosPlantilla++;
+      }
+    }
+
+    if (cantSitiosPlantilla > cantSitios)
+    {
+      cantSitios = cantSitiosPlantilla;
+      idPlantilla = plantilla->getId();
+    }
+  }
+
+  cout << "La plantilla con más sitios web es:" << endl;
+
+  for (auto p : plantillas)
+  {
+    if (p->getId() == idPlantilla)
+    {
+      cout << "ID: " << p->getId() << " Nombre: " << p->getNombre() << endl;
+    }
   }
 }
 

@@ -23,6 +23,10 @@ public:
   void createWebsite(char *elementos[], int cantElementos, int imgPosition, int itemPosition);
   void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos, int ControlItemsImagenes);
 
+  // Métodos para Imprimir
+  void printCommersial();
+  void bestPlantilla();
+
   // Método para obtener la cantidad de sitios web
   int getQtyWebSites() const;
 
