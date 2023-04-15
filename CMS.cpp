@@ -129,14 +129,16 @@ void CMS::decoderData(char *elementos[], int cantElementos)
   int num = atoi(elementos[1]);
 
   // Precio del bit 11 al bit 31 (21 bits)
-  int precio = (num >> 10) & 0xFFFFF;
+  int precio = (num >> 11) & 0xFFFFF;
 
   // Id de la plantilla del bit 6 al bit 10 (5 bits)
   int id = (num >> 6) & 0x1F;
 
   // Localización de Menú (bit 4, 5 y 6) 000=Horizontal superior 001=Horizontal inferior 010=Vertical derecha 011=Vertical izquierda 100=Mixto.
-  int localizacion = num & 0x7;
+  int localizacion = (num >> 3) & 0x7;
   PosicionMenu posicionMenu;
+
+  // cout << "Localizacion: " << localizacion << endl;
 
   switch (localizacion)
   {
@@ -158,6 +160,7 @@ void CMS::decoderData(char *elementos[], int cantElementos)
   default:
     std::cout << "Valor inválido";
   }
+
 
   Plantilla *plantilla = new Plantilla(id, name, posicionMenu, precio);
   plantillas.push_back(plantilla);
@@ -295,6 +298,14 @@ void CMS::bestPlantilla()
     {
       cout << "ID: " << p->getId() << " Nombre: " << p->getNombre() << endl;
     }
+  }
+}
+
+void CMS::pintarWebsites()
+{
+  for (const auto &sitioWeb : webSites)
+  {
+    sitioWeb->pintar();
   }
 }
 

@@ -6,12 +6,13 @@
 class Patrocinado : public SitioWeb
 {
 private:
-  char* dependencia;
+  char *dependencia;
 
 public:
-  Patrocinado(char* nombre, Plantilla plantilla, int cantImagenes, std::vector<Imagen> imagenes,
-               int cantItems, std::vector<Item> items, char* dependencia);
+  Patrocinado(char *nombre, Plantilla plantilla, int cantImagenes, std::vector<Imagen> imagenes,
+              int cantItems, std::vector<Item> items, char *dependencia);
   void pintar() override;
+  void printMixto(std::vector<Item> items);
 };
 
 #endif // PATROCINADO_H

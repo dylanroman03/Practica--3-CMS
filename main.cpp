@@ -12,7 +12,8 @@ int main(int argc, char const *argv[])
 {
   CMS cms;
   cms.addAllWebsites();
-  cms.printCommersial();
-  cms.bestPlantilla();
+  // cms.printCommersial();
+  // cms.bestPlantilla();
+  cms.pintarWebsites();
   return 0;
 }

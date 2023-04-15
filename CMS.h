@@ -26,6 +26,7 @@ public:
   // Métodos para Imprimir
   void printCommersial();
   void bestPlantilla();
+  void pintarWebsites();
 
   // Método para obtener la cantidad de sitios web
   int getQtyWebSites() const;
