@@ -10,25 +10,11 @@ CMS::CMS()
 {
   Datos datos;
   getPlantillas();
+  getImages();
 }
 
 void CMS::mostrarInformacionImagenes(char *Elementos[], int CanidadElementos, int ControlItemsImagenes)
 {
-
-  // for (int k = 0; k < CanidadElementos; k++)
-  // {
-  //   if (ControlItemsImagenes == 1)
-  //   {
-
-  //     if (k == 0)
-  //     {
-
-  //       std::cout << "ITEM" << Elementos[1] << std::endl;
-  //     }
-
-  //     std::cout << Elementos[k] << std::endl;
-  //   }
-  // }
 
   if (ControlItemsImagenes == 1)
   {
@@ -39,31 +25,14 @@ void CMS::mostrarInformacionImagenes(char *Elementos[], int CanidadElementos, in
   else
   {
     int id = atoi(Elementos[0]);
-    char* ruta = Elementos[1];
+    char *ruta = Elementos[1];
     int size = atoi(Elementos[2]);
-    char* name = Elementos[3];
+    char *name = Elementos[3];
     int column = atoi(Elementos[4]);
     int row = atoi(Elementos[5]);
     Imagen *imagen = new Imagen(id, ruta, size, name, column, row);
     imagenes.push_back(imagen);
   }
-
-  cout << endl;
-
-  // for (int k = 0; k < CanidadElementos; k++)
-  // {
-  //   if (ControlItemsImagenes == 0)
-  //   {
-  //     if (k == 0)
-  //     {
-
-  //       std::cout << "imagen" << std::endl;
-  //     }
-  //     std::cout << Elementos[k] << std::endl;
-  //   }
-  // }
-
-  cout << endl;
 }
 
 void CMS::getImages()
@@ -105,19 +74,6 @@ void CMS::getImages()
     }
 
     mostrarInformacionImagenes(Elementos, j, item);
-  }
-
-  /// recorremos los items
-  for (auto item : itemsArray)
-  {
-    cout << item->getId() << item->getNombre() << item->getLocalizacion() << endl;
-  }
-
-  for (auto imagen : imagenes)
-  {
-    // cout << imagen->getId() << imagen->getNombreArchivo() << imagen->getRuta() << endl;
-    /// Imprimimos la ruta
-    cout << imagen->getRuta() << endl;
   }
 }
 
@@ -211,6 +167,8 @@ void CMS::decoderData(char *elementos[], int cantElementos)
 void CMS::addAllWebsites()
 {
   int cantSitios = datos.getCantSitios();
+  int imgPosition = 0;
+  int itemPosition = 0;
 
   for (int i = 0; i < cantSitios; i++)
   {
@@ -236,16 +194,20 @@ void CMS::addAllWebsites()
     cout << elementos[0] << " " << elementos[1] << endl;
 
     // Llamar a la función que crea el sitio web pasandole los elementos
-    createWebsite(elementos, j);
+    createWebsite(elementos, j, imgPosition, itemPosition);
+    imgPosition += atoi(elementos[2]);
+    itemPosition += atoi(elementos[3]);
   }
 }
 
-void CMS::createWebsite(char *elementos[], int cantElementos)
+void CMS::createWebsite(char *elementos[], int cantElementos, int imgPosition, int itemPosition)
 {
   char *name = elementos[0];
   char *id = elementos[1];
-  char *qtyImages = elementos[2];
-  char *qtyItemsMenu = elementos[3];
+  int cantImagenes = atoi(elementos[2]);
+  int cantItemsMenu = atoi(elementos[3]);
+  double price = 10.0;
+
   Plantilla plantilla;
 
   // Recorremos las plantillas para obtener la plantilla con el id
@@ -257,10 +219,25 @@ void CMS::createWebsite(char *elementos[], int cantElementos)
     }
   }
 
-  cout << "Name: " << plantilla.getNombre() << "id: " << plantilla.getId() << endl;
+  std::vector<Imagen> imagenesWS;
+
+  for (int i = imgPosition; i < imgPosition + cantImagenes; i++)
+  {
+    imagenesWS.push_back(*imagenes[i]);
+  }
+
+  std::vector<Item> itemsWS;
+
+  for (int i = itemPosition; i < itemPosition + cantItemsMenu; i++)
+  {
+    itemsWS.push_back(*itemsArray[i]);
+  }
+
   if (cantElementos == 5)
   {
-    // Comercial *comercial = new Comercial("", plantilla, atoi(qtyImages), atoi(qtyItemsMenu));
+    // Comercial *comercial();
+    Comercial *comercial = new Comercial(name, plantilla, cantImagenes, imagenesWS, cantItemsMenu, itemsWS, price);
+    webSites.push_back(comercial);
   }
 }
 

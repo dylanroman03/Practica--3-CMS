@@ -10,7 +10,7 @@
 class SitioWeb
 {
 protected:
-  char* nombre;
+  char *nombre;
   Plantilla plantilla;
   int cantImagenes;
   std::vector<Imagen> imagenes;
@@ -18,9 +18,11 @@ protected:
   std::vector<Item> items;
 
 public:
-  SitioWeb(char* nombre, Plantilla plantilla, int cantImagenes, std::vector<Imagen> imagenes,
+  SitioWeb(char *nombre, Plantilla plantilla, int cantImagenes, std::vector<Imagen> imagenes,
            int cantItems, std::vector<Item> items);
   virtual void pintar() = 0;
+
+  int getCantImagenes() const { return cantImagenes; }
 };
 
 #endif // SITIOWEB_H

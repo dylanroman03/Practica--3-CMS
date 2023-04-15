@@ -12,6 +12,5 @@ int main(int argc, char const *argv[])
 {
   CMS cms;
   cms.addAllWebsites();
-  cms.getImages();
   return 0;
 }

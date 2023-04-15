@@ -20,7 +20,7 @@ public:
   void getImages();
   void getItems();
   void decoderData(char *elementos[], int cantElementos);
-  void createWebsite(char *elementos[], int cantElementos);
+  void createWebsite(char *elementos[], int cantElementos, int imgPosition, int itemPosition);
   void mostrarInformacionImagenes(char *Elementos[], int CanidadElementos, int ControlItemsImagenes);
 
   // Método para obtener la cantidad de sitios web
