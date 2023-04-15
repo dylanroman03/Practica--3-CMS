@@ -244,6 +244,11 @@ void CMS::createWebsite(char *elementos[], int cantElementos, int imgPosition, i
     Comercial *comercial = new Comercial(name, plantilla, cantImagenes, imagenesWS, cantItemsMenu, itemsWS, price);
     webSites.push_back(comercial);
   }
+  else
+  {
+    Patrocinado *patrocinado = new Patrocinado(name, plantilla, cantImagenes, imagenesWS, cantItemsMenu, itemsWS, elementos[5]);
+    webSites.push_back(patrocinado);
+  }
 }
 
 // Método para obtener la cantidad de sitios web
