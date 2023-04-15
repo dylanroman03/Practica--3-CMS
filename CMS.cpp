@@ -198,6 +198,12 @@ void CMS::addAllWebsites()
     imgPosition += atoi(elementos[2]);
     itemPosition += atoi(elementos[3]);
   }
+
+  // Imprimir los webSites
+  for (auto ws : webSites)
+  {
+    ws->pintar();
+  }
 }
 
 void CMS::createWebsite(char *elementos[], int cantElementos, int imgPosition, int itemPosition)
@@ -235,7 +241,6 @@ void CMS::createWebsite(char *elementos[], int cantElementos, int imgPosition, i
 
   if (cantElementos == 5)
   {
-    // Comercial *comercial();
     Comercial *comercial = new Comercial(name, plantilla, cantImagenes, imagenesWS, cantItemsMenu, itemsWS, price);
     webSites.push_back(comercial);
   }

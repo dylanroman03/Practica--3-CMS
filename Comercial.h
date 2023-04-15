@@ -11,7 +11,6 @@ private:
 public:
   Comercial(char *nombre, Plantilla plantilla, int cantImagenes, std::vector<Imagen> imagenes,
             int cantItems, std::vector<Item> items, double precio);
-  Comercial();
   void pintar() override;
 };
 
