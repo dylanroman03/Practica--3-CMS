@@ -278,14 +278,14 @@ void CMS::memoryImages()
   int total = 0;
   for (const auto &sitioWeb : webSites)
   {
-    int tamaño = 0;
+    int tamano = 0;
     std::vector<Imagen> images = sitioWeb->getImagenes();
     for (const auto &image : images)
     {
-      tamaño += image.getTamano();
+      tamano += image.getTamano();
     }
-    cout << sitioWeb->getNombre() << "\t\t\t" << tamaño << endl;
-    total += tamaño;
+    cout << sitioWeb->getNombre() << "\t\t\t" << tamano << endl;
+    total += tamano;
   }
 
   cout << "\t\t Total: " << total << endl;
